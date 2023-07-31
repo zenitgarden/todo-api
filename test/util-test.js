@@ -249,3 +249,7 @@ export const assignCategoriesOnTodo = async () => {
 export const getTodos = async () => {
     return prismaClient.todo.findMany({ where: { owner: newUser.username } })
 }
+
+export const getCategoriesOnTodos = async (id = 'todo-id-1') => {
+    return prismaClient.categoriesOnTodos.count({ where: { todo_id: id } })
+}

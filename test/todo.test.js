@@ -1,13 +1,7 @@
 import supertest from "supertest";
 import { app } from "../src/application/app";
-import { assignCategoriesOnTodo, createCategory, createCustomCategory, createCustomUser, createTodo, createTodos, createUserAndLogin, getTodo, getTodos, getUserToken, login, newTodo, removeAllCategories, removeTodos, removeUsers } from "./util-test";
-import { request } from "express";
+import { assignCategoriesOnTodo, createCategory, createCustomCategory, createCustomUser, createTodo, createTodos, createUserAndLogin, getCategoriesOnTodos, getTodo, getTodos, getUserToken, login, newTodo, removeAllCategories, removeTodos, removeUsers } from "./util-test";
 
-
-// NOTE lakukan test untuk removeTodo, apakah hasilnya di table todo_category akan ke hapus juga/ tidak
-// update masih ada bug
-// note buat update todo -- merge array of object
-// elminate the same id in array of object
 describe('Todo API', () => {
     beforeEach(async () => {
         await createUserAndLogin();
@@ -347,6 +341,11 @@ describe('Todo API', () => {
             expect(result.body.success).toBe('OK')
             todos = await getTodos()
             expect(todos.length).toBe(2)
+
+            const categoriesOnTodo = await getCategoriesOnTodos()
+            expect(categoriesOnTodo).toBe(0)
+
+            
         });
 
         it('should be able to delete todo', async () => {
