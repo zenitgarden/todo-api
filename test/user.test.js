@@ -33,7 +33,6 @@ describe('User API', () => {
 
         it('should return status code 400 if payload is invalid', async() => {
             const result = await supertest(app).post('/api/users').send({})
-            console.log(result.body)
             expect(result.status).toBe(400);
             expect(result.body.errors).toBeDefined();
         });
@@ -215,7 +214,6 @@ describe('User API', () => {
                 .send({
                     name: 123
                 })
-            console.log(result.body)
             expect(result.status).toBe(400)
             expect(result.body.errors).toBeDefined()
         });
